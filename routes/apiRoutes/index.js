@@ -13,9 +13,12 @@ router.get('/notes', (req, res)=> {
 
 router.post('/notes', (req,res) => {
     let everyNote = fs.readFileSync(path.join(__dirname, '../../Develop/db/db.json'));
+   //transform notes in db from JSON string into JS object
     everyNote = JSON.parse(everyNote);
+    //get new note from the request body information
     let newNote = req.body
     newNote.id = uuidv4();
+    //pushs new note into the Js object
     everyNote.push(newNote)
     // saves the message to the json file
     fs.writeFileSync(path.join(__dirname, '../../Develop/db/db.json'), 
